@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviva Agency - SMM & Web Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* AMAZING LOADING SPINNER */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Spinner */
+        .spinner-main {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        /* Outer Ring */
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        /* Inner Morphing Shape */
+        .spinner-morph {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            animation: morph 3s ease-in-out infinite, gradientShift 4s ease-in-out infinite;
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 80%; left: 80%; animation-delay: 0.5s; }
+        .particle:nth-child(3) { top: 60%; left: 10%; animation-delay: 1s; }
+        .particle:nth-child(4) { top: 30%; left: 90%; animation-delay: 1.5s; }
+        .particle:nth-child(5) { top: 90%; left: 30%; animation-delay: 2s; }
+        .particle:nth-child(6) { top: 10%; left: 70%; animation-delay: 2.5s; }
+
+        /* Pulsing Dots */
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        .dot:nth-child(4) { animation-delay: 0.6s; }
+        .dot:nth-child(5) { animation-delay: 0.8s; }
+
+        /* Loading Text */
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .loading-subtext {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            text-align: center;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 2px;
+            animation: progressFill 3s ease-in-out infinite;
+        }
+
+        /* Floating Geometric Shapes */
+        .geo-shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatGeo 6s ease-in-out infinite;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid rgba(255, 255, 255, 0.3);
+            top: 20%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .square {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            top: 70%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        .circle {
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 40%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes morph {
+            0%, 100% { 
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            25% { 
+                border-radius: 25%;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            50% { 
+                border-radius: 10%;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            75% { 
+                border-radius: 35%;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scale(1.5);
+                opacity: 1;
+            }
+        }
+
+        @keyframes textGlow {
+            0% { 
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% { 
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes progressFill {
+            0% { 
+                width: 0%;
+                transform: translateX(-100%);
+            }
+            50% { 
+                width: 100%;
+                transform: translateX(0%);
+            }
+            100% { 
+                width: 100%;
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes floatGeo {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Aviva Agency Logo Styling */
+        .logo {
+            font-size: 2.5rem; /* Larger and more prominent */
+            font-weight: 900; /* Extra bold */
+            letter-spacing: 2px; /* Spaced out for elegance */
+            background: linear-gradient(45deg, #ffeb3b, #ff6b6b, #764ba2); /* Vibrant gradient */
+            -webkit-background-clip: text; /* Clip background to text shape */
+            -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Soft white glow */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            cursor: pointer; /* Indicate interactivity */
+        }
+
+        .logo:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1); /* More prominent glow on hover */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,107,0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .portfolio-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .portfolio-item.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Lazy loading styles */
+        .portfolio-image img[data-src] {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-image img.loaded {
+            opacity: 1;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .view-case-study {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .view-case-study:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .case-study-content {
+            padding: 2rem;
+        }
+
+        .case-study-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .case-study-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-study-header p {
+            opacity: 0.9;
+        }
+
+        .case-study-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .case-study-stat {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .case-study-stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .case-study-section {
+            margin-bottom: 2rem;
+        }
+
+        .case-study-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .case-study-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-image {
+            width: 100%;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #ff5252;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-filters {
+                justify-content: center;
+            }
+
+            .spinner-main {
+                width: 80px;
+                height: 80px;
+            }
+
+            .spinner-morph {
+                width: 40px;
+                height: 40px;
+            }
+
+            .loading-text {
+                font-size: 20px;
+            }
+
+            .logo {
+                font-size: 2rem; /* Adjust for smaller screens */
+            }
+        }
+
+        /* Hidden class for language switching */
+        .hidden {
+            display: none;
+        }
+
+        /* Loading placeholder */
+        .img-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- AMAZING LOADING SPINNER -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-container">
+            <!-- Floating Geometric Shapes -->
+            <div class="geo-shape triangle"></div>
+            <div class="geo-shape square"></div>
+            <div class="geo-shape circle"></div>
+            
+            <!-- Main Spinner -->
+            <div class="spinner-main">
+                <div class="spinner-ring"></div>
+                <div class="spinner-morph"></div>
+                
+                <!-- Floating Particles -->
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            
+            <!-- Pulsing Dots -->
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <!-- Loading Text -->
+            <div class="loading-text">Aviva Agency</div>
+            <div class="loading-subtext">Creating Digital Excellence...</div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Aviva Agency</div>
+            <ul class="nav-links">
+                <li><a href="#home" data-translate="nav-home">Home</a></li>
+                <li><a href="#services" data-translate="nav-services">Services</a></li>
+                <li><a href="#portfolio" data-translate="nav-portfolio">Portfolio</a></li>
+                <li><a href="#about" data-translate="nav-about">About</a></li>
+                <li><a href="#contact" data-translate="nav-contact">Contact</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('uk')">UK</button>
+                <button class="lang-btn" onclick="changeLanguage('de')">DE</button>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 data-translate="hero-title">Digital Marketing & Web Development</h1>
+            <p data-translate="hero-subtitle">We create stunning websites and powerful social media strategies that drive results for your business</p>
+            <a href="#contact" class="cta-button" data-translate="hero-cta">Get Started Today</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title" data-translate="services-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3 data-translate="service-smm-title">Social Media Marketing</h3>
+                    <p data-translate="service-smm-desc">Boost your brand presence across all social platforms with our strategic marketing campaigns and engaging content creation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3 data-translate="service-web-title">Web Development</h3>
+                    <p data-translate="service-web-desc">Custom websites and web applications built with modern technologies to deliver exceptional user experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 data-translate="service-design-title">UI/UX Design</h3>
+                    <p data-translate="service-design-desc">Beautiful, intuitive designs that convert visitors into customers and provide seamless user experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 data-translate="service-analytics-title">Analytics & SEO</h3>
+                    <p data-translate="service-analytics-desc">Data-driven insights and search engine optimization to maximize your online visibility and performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title" data-translate="portfolio-title">Our Portfolio</h2>
+            <p class="portfolio-subtitle" data-translate="portfolio-subtitle">Explore our successful projects and case studies</p>
+            
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all" data-translate="filter-all">All Projects</button>
+                <button class="filter-btn" data-filter="smm" data-translate="filter-smm">Social Media</button>
+                <button class="filter-btn" data-filter="web" data-translate="filter-web">Web Development</button>
+                <button class="filter-btn" data-filter="design" data-translate="filter-design">Design</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="smm">
+                    <div class="portfolio-image">
+                        <img data-src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop" alt="Fashion Brand SMM Campaign" class="img-placeholder">
+                        <div class="portfolio-overlay">
+                            <h3 data-translate="project-fashion-title">Fashion Brand Campaign</h3>
+                            <p data-translate="project-fashion-desc">Social Media Marketing</p>
+                            <button class="view-case-study" onclick="openModal('fashion-case')" data-translate="view-case-study">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-image">
+                        <img data-src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" alt="E-commerce Website" class="img-placeholder">
+                        <div class="portfolio-overlay">
+                            <h3 data-translate="project-ecommerce-title">E-commerce Platform</h3>
+                            <p data-translate="project-ecommerce-desc">Web Development</p>
+                            <button class="view-case-study" onclick="openModal('ecommerce-case')" data-translate="view-case-study">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="design">
+                    <div class="portfolio-image">
+                        <img data-src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=400&h=300&fit=crop" alt="Restaurant App Design" class="img-placeholder">
+                        <div class="portfolio-overlay">
+                            <h3 data-translate="project-restaurant-title">Restaurant App Design</h3>
+                            <p data-translate="project-restaurant-desc">UI/UX Design</p>
+                            <button class="view-case-study" onclick="openModal('restaurant-case')" data-translate="view-case-study">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="smm">
+                    <div class="portfolio-image">
+                        <img data-src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop" alt="Tech Startup SMM" class="img-placeholder">
+                        <div class="portfolio-overlay">
+                            <h3 data-translate="project-tech-title">Tech Startup Growth</h3>
+                            <p data-translate="project-tech-desc">Social Media Marketing</p>
+                            <button class="view-case-study" onclick="openModal('tech-case')" data-translate="view-case-study">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-image">
+                        <img data-src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Corporate Website" class="img-placeholder">
+                        <div class="portfolio-overlay">
+                            <h3 data-translate="project-corporate-title">Corporate Website</h3>
+                            <p data-translate="project-corporate-desc">Web Development</p>
+                            <button class="view-case-study" onclick="openModal('corporate-case')" data-translate="view-case-study">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="design">
+                    <div class="portfolio-image">
+                        <img data-src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop" alt="Mobile Banking App" class="img-placeholder">
+                        <div class="portfolio-overlay">
+                            <h3 data-translate="project-banking-title">Mobile Banking App</h3>
+                            <p data-translate="project-banking-desc">UI/UX Design</p>
+                            <button class="view-case-study" onclick="openModal('banking-case')" data-translate="view-case-study">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Case Studies -->
+    <div id="case-study-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Case study content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-translate="about-title">About Aviva Agency</h2>
+                    <p data-translate="about-desc1">We are a full-service digital agency specializing in social media marketing and web development. Our team of experts combines creativity with technical expertise to deliver outstanding results.</p>
+                    <p data-translate="about-desc2">With years of experience in the industry, we understand what it takes to build a strong online presence and drive business growth through digital channels.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-number">150+</div>
+                            <div data-translate="stat-projects">Projects Completed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div data-translate="stat-clients">Happy Clients</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5+</div>
+                            <div data-translate="stat-years">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">24/7</div>
+                            <div data-translate="stat-support">Support</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img data-src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=400&fit=crop" alt="About Us" class="img-placeholder">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-translate="contact-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name" data-translate="form-name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-translate="form-email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service" data-translate="form-service">Service Needed</label>
+                            <input type="text" id="service" name="service">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-translate="form-message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" data-translate="form-submit">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <h3 data-translate="contact-info-title">Contact Information</h3>
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <span>info@avivaagency.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i>📞</i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i>🕒</i>
+                        <span data-translate="contact-hours">Mon - Fri: 9:00 AM - 6:00 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p data-translate="footer-text">&copy; 2024 Aviva Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                'nav-home': 'Home',
+                'nav-services': 'Services',
+                'nav-about': 'About',
+                'nav-contact': 'Contact',
+                'nav-portfolio': 'Portfolio',
+                'hero-title': 'Digital Marketing & Web Development',
+                'hero-subtitle': 'We create stunning websites and powerful social media strategies that drive results for your business',
+                'hero-cta': 'Get Started Today',
+                'services-title': 'Our Services',
+                'service-smm-title': 'Social Media Marketing',
+                'service-smm-desc': 'Boost your brand presence across all social platforms with our strategic marketing campaigns and engaging content creation.',
+                'service-web-title': 'Web Development',
+                'service-web-desc': 'Custom websites and web applications built with modern technologies to deliver exceptional user experiences.',
+                'service-design-title': 'UI/UX Design',
+                'service-design-desc': 'Beautiful, intuitive designs that convert visitors into customers and provide seamless user experiences.',
+                'service-analytics-title': 'Analytics & SEO',
+                'service-analytics-desc': 'Data-driven insights and search engine optimization to maximize your online visibility and performance.',
+                'portfolio-title': 'Our Portfolio',
+                'portfolio-subtitle': 'Explore our successful projects and case studies',
+                'filter-all': 'All Projects',
+                'filter-smm': 'Social Media',
+                'filter-web': 'Web Development',
+                'filter-design': 'Design',
+                'view-case-study': 'View Case Study',
+                'project-fashion-title': 'Fashion Brand Campaign',
+                'project-fashion-desc': 'Social Media Marketing',
+                'project-ecommerce-title': 'E-commerce Platform',
+                'project-ecommerce-desc': 'Web Development',
+                'project-restaurant-title': 'Restaurant App Design',
+                'project-restaurant-desc': 'UI/UX Design',
+                'project-tech-title': 'Tech Startup Growth',
+                'project-tech-desc': 'Social Media Marketing',
+                'project-corporate-title': 'Corporate Website',
+                'project-corporate-desc': 'Web Development',
+                'project-banking-title': 'Mobile Banking App',
+                'project-banking-desc': 'UI/UX Design',
+                'about-title': 'About Aviva Agency',
+                'about-desc1': 'We are a full-service digital agency specializing in social media marketing and web development. Our team of experts combines creativity with technical expertise to deliver outstanding results.',
+                'about-desc2': 'With years of experience in the industry, we understand what it takes to build a strong online presence and drive business growth through digital channels.',
+                'stat-projects': 'Projects Completed',
+                'stat-clients': 'Happy Clients',
+                'stat-years': 'Years Experience',
+                'stat-support': 'Support',
+                'contact-title': 'Get In Touch',
+                'form-name': 'Name',
+                'form-email': 'Email',
+                'form-service': 'Service Needed',
+                'form-message': 'Message',
+                'form-submit': 'Send Message',
+                'contact-info-title': 'Contact Information',
+                'contact-hours': 'Mon - Fri: 9:00 AM - 6:00 PM',
+                'footer-text': '© 2024 Aviva Agency. All rights reserved.'
+            },
+            uk: {
+                'nav-home': 'Головна',
+                'nav-services': 'Послуги',
+                'nav-about': 'Про нас',
+                'nav-contact': 'Контакти',
+                'nav-portfolio': 'Портфоліо',
+                'hero-title': 'Цифровий маркетинг та веб-розробка',
+                'hero-subtitle': 'Ми створюємо приголомшливі веб-сайти та потужні стратегії соціальних мереж, які приносять результати для вашого бізнесу',
+                'hero-cta': 'Почати сьогодні',
+                'services-title': 'Наші послуги',
+                'service-smm-title': 'Маркетинг у соціальних мережах',
+                'service-smm-desc': 'Підвищуйте присутність вашого бренду на всіх соціальних платформах за допомогою наших стратегічних маркетингових кампаній та залучаючого контенту.',
+                'service-web-title': 'Веб-розробка',
+                'service-web-desc': 'Індивідуальні веб-сайти та веб-додатки, створені з використанням сучасних технологій для надання виняткового користувацького досвіду.',
+                'service-design-title': 'UI/UX дизайн',
+                'service-design-desc': 'Красивий, інтуїтивний дизайн, який перетворює відвідувачів на клієнтів та забезпечує безперебійний користувацький досвід.',
+                'service-analytics-title': 'Аналітика та SEO',
+                'service-analytics-desc': 'Аналітичні дані та оптимізація пошукових систем для максимізації вашої онлайн-видимості та продуктивності.',
+                'portfolio-title': 'Наше портфоліо',
+                'portfolio-subtitle': 'Ознайомтеся з нашими успішними проектами та кейсами',
+                'filter-all': 'Всі проекти',
+                'filter-smm': 'Соціальні мережі',
+                'filter-web': 'Веб-розробка',
+                'filter-design': 'Дизайн',
+                'view-case-study': 'Переглянути кейс',
+                'project-fashion-title': 'Кампанія модного бренду',
+                'project-fashion-desc': 'Маркетинг у соціальних мережах',
+                'project-ecommerce-title': 'E-commerce платформа',
+                'project-ecommerce-desc': 'Веб-розробка',
+                'project-restaurant-title': 'Дизайн додатку ресторану',
+                'project-restaurant-desc': 'UI/UX дизайн',
+                'project-tech-title': 'Зростання тех-стартапу',
+                'project-tech-desc': 'Маркетинг у соціальних мережах',
+                'project-corporate-title': 'Корпоративний веб-сайт',
+                'project-corporate-desc': 'Веб-розробка',
+                'project-banking-title': 'Мобільний банківський додаток',
+                'project-banking-desc': 'UI/UX дизайн',
+                'about-title': 'Про Aviva Agency',
+                'about-desc1': 'Ми - повносервісне цифрове агентство, що спеціалізується на маркетингу в соціальних мережах та веб-розробці. Наша команда експертів поєднує креативність з технічною експертизою для досягнення видатних результатів.',
+                'about-desc2': 'Маючи багаторічний досвід у галузі, ми розуміємо, що потрібно для створення сильної онлайн-присутності та стимулювання зростання бізнесу через цифрові канали.',
+                'stat-projects': 'Завершених проектів',
+                'stat-clients': 'Задоволених клієнтів',
+                'stat-years': 'Років досвіду',
+                'stat-support': 'Підтримка',
+                'contact-title': 'Зв\'яжіться з нами',
+                'form-name': 'Ім\'я',
+                'form-email': 'Електронна пошта',
+                'form-service': 'Потрібна послуга',
+                'form-message': 'Повідомлення',
+                'form-submit': 'Надіслати повідомлення',
+                'contact-info-title': 'Контактна інформація',
+                'contact-hours': 'Пн - Пт: 9:00 - 18:00',
+                'footer-text': '© 2024 Aviva Agency. Всі права захищені.'
+            },
+            de: {
+                'nav-home': 'Startseite',
+                'nav-services': 'Dienstleistungen',
+                'nav-about': 'Über uns',
+                'nav-contact': 'Kontakt',
+                'nav-portfolio': 'Portfolio',
+                'hero-title': 'Digitales Marketing & Webentwicklung',
+                'hero-subtitle': 'Wir erstellen beeindruckende Websites und kraftvolle Social-Media-Strategien, die Ergebnisse für Ihr Unternehmen erzielen',
+                'hero-cta': 'Heute beginnen',
+                'services-title': 'Unsere Dienstleistungen',
+                'service-smm-title': 'Social Media Marketing',
+                'service-smm-desc': 'Steigern Sie Ihre Markenpräsenz auf allen sozialen Plattformen mit unseren strategischen Marketingkampagnen und ansprechenden Inhalten.',
+                'service-web-title': 'Webentwicklung',
+                'service-web-desc': 'Maßgeschneiderte Websites und Webanwendungen mit modernen Technologien für außergewöhnliche Benutzererfahrungen.',
+                'service-design-title': 'UI/UX Design',
+                'service-design-desc': 'Schöne, intuitive Designs, die Besucher in Kunden verwandeln und nahtlose Benutzererfahrungen bieten.',
+                'service-analytics-title': 'Analytics & SEO',
+                'service-analytics-desc': 'Datengesteuerte Einblicke und Suchmaschinenoptimierung zur Maximierung Ihrer Online-Sichtbarkeit und Leistung.',
+                'portfolio-title': 'Unser Portfolio',
+                'portfolio-subtitle': 'Entdecken Sie unsere erfolgreichen Projekte und Fallstudien',
+                'filter-all': 'Alle Projekte',
+                'filter-smm': 'Social Media',
+                'filter-web': 'Webentwicklung',
+                'filter-design': 'Design',
+                'view-case-study': 'Fallstudie ansehen',
+                'project-fashion-title': 'Mode-Marken-Kampagne',
+                'project-fashion-desc': 'Social Media Marketing',
+                'project-ecommerce-title': 'E-Commerce-Plattform',
+                'project-ecommerce-desc': 'Webentwicklung',
+                'project-restaurant-title': 'Restaurant-App-Design',
+                'project-restaurant-desc': 'UI/UX Design',
+                'project-tech-title': 'Tech-Startup-Wachstum',
+                'project-tech-desc': 'Social Media Marketing',
+                'project-corporate-title': 'Unternehmenswebsite',
+                'project-corporate-desc': 'Webentwicklung',
+                'project-banking-title': 'Mobile Banking App',
+                'project-banking-desc': 'UI/UX Design',
+                'about-title': 'Über Aviva Agency',
+                'about-desc1': 'Wir sind eine Full-Service-Digitalagentur, die sich auf Social Media Marketing und Webentwicklung spezialisiert hat. Unser Expertenteam kombiniert Kreativität mit technischer Expertise, um herausragende Ergebnisse zu liefern.',
+                'about-desc2': 'Mit jahrelanger Erfahrung in der Branche verstehen wir, was es braucht, um eine starke Online-Präsenz aufzubauen und das Geschäftswachstum durch digitale Kanäle voranzutreiben.',
+                'stat-projects': 'Abgeschlossene Projekte',
+                'stat-clients': 'Zufriedene Kunden',
+                'stat-years': 'Jahre Erfahrung',
+                'stat-support': 'Support',
+                'contact-title': 'Kontakt aufnehmen',
+                'form-name': 'Name',
+                'form-email': 'E-Mail',
+                'form-service': 'Benötigte Dienstleistung',
+                'form-message': 'Nachricht',
+                'form-submit': 'Nachricht senden',
+                'contact-info-title': 'Kontaktinformationen',
+                'contact-hours': 'Mo - Fr: 9:00 - 18:00 Uhr',
+                'footer-text': '© 2024 Aviva Agency. Alle Rechte vorbehalten.'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        // AMAZING LOADING FUNCTIONALITY
+        window.addEventListener('load', function() {
+            // Simulate loading time for dramatic effect
+            setTimeout(function() {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                loadingOverlay.classList.add('hidden');
+                
+                // Remove from DOM after transition
+                setTimeout(function() {
+                    loadingOverlay.remove();
+                }, 800);
+            }, 3000); // 3 seconds of amazing loading animation
+        });
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Lazy loading functionality
+        function lazyLoad() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('img-placeholder');
+                        img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Initialize lazy loading when DOM is loaded
+        document.addEventListener('DOMContentLoaded', lazyLoad);
+
+        // Portfolio filtering functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const items = document.querySelectorAll('.portfolio-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Case study data
+        const caseStudies = {
+            'fashion-case': {
+                title: 'Fashion Brand Social Media Campaign',
+                subtitle: 'Luxury Fashion Brand - Social Media Marketing',
+                stats: [
+                    { number: '300%', label: 'Follower Growth' },
+                    { number: '150%', label: 'Engagement Rate' },
+                    { number: '200%', label: 'Website Traffic' },
+                    { number: '6 months', label: 'Campaign Duration' }
+                ],
+                challenge: 'A luxury fashion brand needed to increase their social media presence and drive more traffic to their e-commerce store.',
+                solution: 'We developed a comprehensive social media strategy focusing on Instagram and TikTok, creating high-quality visual content and influencer partnerships.',
+                results: 'The campaign resulted in a 300% increase in followers, 150% higher engagement rates, and 200% more website traffic from social media.',
+                image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=300&fit=crop'
+            },
+            'ecommerce-case': {
+                title: 'E-commerce Platform Development',
+                subtitle: 'Custom E-commerce Solution - Web Development',
+                stats: [
+                    { number: '50%', label: 'Faster Loading' },
+                    { number: '40%', label: 'Higher Conversion' },
+                    { number: '99.9%', label: 'Uptime' },
+                    { number: '3 months', label: 'Development Time' }
+                ],
+                challenge: 'A growing retail business needed a custom e-commerce platform to handle their expanding product catalog and customer base.',
+                solution: 'We built a scalable e-commerce platform using modern web technologies, focusing on performance, user experience, and mobile responsiveness.',
+                results: 'The new platform loads 50% faster, has 40% higher conversion rates, and maintains 99.9% uptime.',
+                image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=300&fit=crop'
+            },
+            'restaurant-case': {
+                title: 'Restaurant Mobile App Design',
+                subtitle: 'Food Delivery App - UI/UX Design',
+                stats: [
+                    { number: '4.8/5', label: 'App Store Rating' },
+                    { number: '60%', label: 'Order Increase' },
+                    { number: '25%', label: 'Faster Ordering' },
+                    { number: '2 months', label: 'Design Process' }
+                ],
+                challenge: 'A restaurant chain wanted to create a mobile app to streamline their ordering process and improve customer experience.',
+                solution: 'We designed an intuitive mobile app with easy navigation, visual menu display, and seamless ordering process.',
+                results: 'The app achieved a 4.8/5 rating, increased orders by 60%, and reduced ordering time by 25%.',
+                image: 'https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=600&h=300&fit=crop'
+            },
+            'tech-case': {
+                title: 'Tech Startup Growth Campaign',
+                subtitle: 'B2B SaaS Startup - Social Media Marketing',
+                stats: [
+                    { number: '500%', label: 'Lead Generation' },
+                    { number: '250%', label: 'Brand Awareness' },
+                    { number: '180%', label: 'LinkedIn Growth' },
+                    { number: '4 months', label: 'Campaign Period' }
+                ],
+                challenge: 'A B2B SaaS startup needed to establish thought leadership and generate qualified leads through social media.',
+                solution: 'We created a content strategy focusing on LinkedIn and Twitter, sharing industry insights and case studies.',
+                results: 'Generated 500% more leads, increased brand awareness by 250%, and grew LinkedIn following by 180%.',
+                image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=300&fit=crop'
+            },
+            'corporate-case': {
+                title: 'Corporate Website Redesign',
+                subtitle: 'Fortune 500 Company - Web Development',
+                stats: [
+                    { number: '70%', label: 'Better Performance' },
+                    { number: '45%', label: 'More Conversions' },
+                    { number: '100%', label: 'Mobile Optimized' },
+                    { number: '5 months', label: 'Project Timeline' }
+                ],
+                challenge: 'A Fortune 500 company needed to modernize their outdated website and improve user experience.',
+                solution: 'We redesigned the entire website with modern design principles, improved navigation, and mobile optimization.',
+                results: 'Achieved 70% better performance scores, 45% more conversions, and 100% mobile optimization.',
+                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop'
+            },
+            'banking-case': {
+                title: 'Mobile Banking App Design',
+                subtitle: 'Financial Institution - UI/UX Design',
+                stats: [
+                    { number: '4.9/5', label: 'User Rating' },
+                    { number: '80%', label: 'Task Completion' },
+                    { number: '35%', label: 'Faster Transactions' },
+                    { number: '6 months', label: 'Design & Testing' }
+                ],
+                challenge: 'A financial institution wanted to create a secure and user-friendly mobile banking app.',
+                solution: 'We designed a clean, intuitive interface with advanced security features and streamlined user flows.',
+                results: 'The app received a 4.9/5 user rating, 80% task completion rate, and 35% faster transaction times.',
+                image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=300&fit=crop'
+            }
+        };
+
+        // Modal functionality
+        function openModal(caseId) {
+            const modal = document.getElementById('case-study-modal');
+            const modalBody = document.getElementById('modal-body');
+            const caseData = caseStudies[caseId];
+            
+            if (caseData) {
+                modalBody.innerHTML = `
+                    <div class="case-study-header">
+                        <h2>${caseData.title}</h2>
+                        <p>${caseData.subtitle}</p>
+                    </div>
+                    <div class="case-study-content">
+                        <div class="case-study-stats">
+                            ${caseData.stats.map(stat => `
+                                <div class="case-study-stat">
+                                    <span class="case-study-stat-number">${stat.number}</span>
+                                    <span>${stat.label}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="case-study-section">
+                            <h3>Challenge</h3>
+                            <p>${caseData.challenge}</p>
+                        </div>
+                        
+                        <div class="case-study-section">
+                            <h3>Solution</h3>
+                            <p>${caseData.solution}</p>
+                        </div>
+                        
+                        <div class="case-study-section">
+                            <h3>Results</h3>
+                            <p>${caseData.results}</p>
+                        </div>
+                        
+                        <img src="${caseData.image}" alt="${caseData.title}" class="case-study-image">
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('case-study-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('case-study-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            alert(translations[currentLanguage]['form-submit'] + '! ' + 
+                  (currentLanguage === 'en' ? 'Thank you for your message.' : 
+                   currentLanguage === 'uk' ? 'Дякуємо за ваше повідомлення.' : 
+                   'Vielen Dank für Ihre Nachricht.'));
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
