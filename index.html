@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aviva Agency - SMM & Web Development</title>
     <style>
+        /* CSS remains unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -307,20 +308,20 @@
 
         /* Aviva Agency Logo Styling */
         .logo {
-            font-size: 2.5rem; /* Larger and more prominent */
-            font-weight: 900; /* Extra bold */
-            letter-spacing: 2px; /* Spaced out for elegance */
-            background: linear-gradient(45deg, #ffeb3b, #ff6b6b, #764ba2); /* Vibrant gradient */
-            -webkit-background-clip: text; /* Clip background to text shape */
-            -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Soft white glow */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
-            cursor: pointer; /* Indicate interactivity */
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #ffeb3b, #ff6b6b, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .logo:hover {
-            transform: scale(1.05); /* Slight zoom on hover */
-            text-shadow: 0 0 15px rgba(255, 255, 255, 1); /* More prominent glow on hover */
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1);
         }
 
         .nav-links {
@@ -340,29 +341,9 @@
             opacity: 0.8;
         }
 
-        .language-switcher {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .lang-btn {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .lang-btn:hover,
-        .lang-btn.active {
-            background: rgba(255,255,255,0.3);
-        }
-
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135 Bref: #667eea 0%, #764ba2 100%);
             color: white;
             padding: 120px 0 80px;
             text-align: center;
@@ -901,11 +882,11 @@
             }
 
             .logo {
-                font-size: 2rem; /* Adjust for smaller screens */
+                font-size: 2rem;
             }
         }
 
-        /* Hidden class for language switching */
+        /* Hidden class for portfolio items */
         .hidden {
             display: none;
         }
@@ -974,51 +955,46 @@
         <nav class="container">
             <div class="logo">Aviva Agency</div>
             <ul class="nav-links">
-                <li><a href="#home" data-translate="nav-home">Home</a></li>
-                <li><a href="#services" data-translate="nav-services">Services</a></li>
-                <li><a href="#portfolio" data-translate="nav-portfolio">Portfolio</a></li>
-                <li><a href="#about" data-translate="nav-about">About</a></li>
-                <li><a href="#contact" data-translate="nav-contact">Contact</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="language-switcher">
-                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="changeLanguage('uk')">UK</button>
-                <button class="lang-btn" onclick="changeLanguage('de')">DE</button>
-            </div>
         </nav>
     </header>
 
     <section id="home" class="hero">
         <div class="container">
-            <h1 data-translate="hero-title">Digital Marketing & Web Development</h1>
-            <p data-translate="hero-subtitle">We create stunning websites and powerful social media strategies that drive results for your business</p>
-            <a href="#contact" class="cta-button" data-translate="hero-cta">Get Started Today</a>
+            <h1>Digital Marketing & Web Development</h1>
+            <p>We create stunning websites and powerful social media strategies that drive results for your business</p>
+            <a href="#contact" class="cta-button">Get Started Today</a>
         </div>
     </section>
 
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title" data-translate="services-title">Our Services</h2>
+            <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">📱</div>
-                    <h3 data-translate="service-smm-title">Social Media Marketing</h3>
-                    <p data-translate="service-smm-desc">Boost your brand presence across all social platforms with our strategic marketing campaigns and engaging content creation.</p>
+                    <h3>Social Media Marketing</h3>
+                    <p>Boost your brand presence across all social platforms with our strategic marketing campaigns and engaging content creation.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">💻</div>
-                    <h3 data-translate="service-web-title">Web Development</h3>
-                    <p data-translate="service-web-desc">Custom websites and web applications built with modern technologies to deliver exceptional user experiences.</p>
+                    <h3>Web Development</h3>
+                    <p>Custom websites and web applications built with modern technologies to deliver exceptional user experiences.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🎨</div>
-                    <h3 data-translate="service-design-title">UI/UX Design</h3>
-                    <p data-translate="service-design-desc">Beautiful, intuitive designs that convert visitors into customers and provide seamless user experiences.</p>
+                    <h3>UI/UX Design</h3>
+                    <p>Beautiful, intuitive designs that convert visitors into customers and provide seamless user experiences.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📊</div>
-                    <h3 data-translate="service-analytics-title">Analytics & SEO</h3>
-                    <p data-translate="service-analytics-desc">Data-driven insights and search engine optimization to maximize your online visibility and performance.</p>
+                    <h3>Analytics & SEO</h3>
+                    <p>Data-driven insights and search engine optimization to maximize your online visibility and performance.</p>
                 </div>
             </div>
         </div>
@@ -1026,14 +1002,14 @@
 
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title" data-translate="portfolio-title">Our Portfolio</h2>
-            <p class="portfolio-subtitle" data-translate="portfolio-subtitle">Explore our successful projects and case studies</p>
+            <h2 class="section-title">Our Portfolio</h2>
+            <p class="portfolio-subtitle">Explore our successful projects and case studies</p>
             
             <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all" data-translate="filter-all">All Projects</button>
-                <button class="filter-btn" data-filter="smm" data-translate="filter-smm">Social Media</button>
-                <button class="filter-btn" data-filter="web" data-translate="filter-web">Web Development</button>
-                <button class="filter-btn" data-filter="design" data-translate="filter-design">Design</button>
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="smm">Social Media</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="design">Design</button>
             </div>
 
             <div class="portfolio-grid">
@@ -1041,9 +1017,9 @@
                     <div class="portfolio-image">
                         <img data-src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop" alt="Fashion Brand SMM Campaign" class="img-placeholder">
                         <div class="portfolio-overlay">
-                            <h3 data-translate="project-fashion-title">Fashion Brand Campaign</h3>
-                            <p data-translate="project-fashion-desc">Social Media Marketing</p>
-                            <button class="view-case-study" onclick="openModal('fashion-case')" data-translate="view-case-study">View Case Study</button>
+                            <h3>Fashion Brand Campaign</h3>
+                            <p>Social Media Marketing</p>
+                            <button class="view-case-study" onclick="openModal('fashion-case')">View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -1052,9 +1028,9 @@
                     <div class="portfolio-image">
                         <img data-src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" alt="E-commerce Website" class="img-placeholder">
                         <div class="portfolio-overlay">
-                            <h3 data-translate="project-ecommerce-title">E-commerce Platform</h3>
-                            <p data-translate="project-ecommerce-desc">Web Development</p>
-                            <button class="view-case-study" onclick="openModal('ecommerce-case')" data-translate="view-case-study">View Case Study</button>
+                            <h3>E-commerce Platform</h3>
+                            <p>Web Development</p>
+                            <button class="view-case-study" onclick="openModal('ecommerce-case')">View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -1063,9 +1039,9 @@
                     <div class="portfolio-image">
                         <img data-src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=400&h=300&fit=crop" alt="Restaurant App Design" class="img-placeholder">
                         <div class="portfolio-overlay">
-                            <h3 data-translate="project-restaurant-title">Restaurant App Design</h3>
-                            <p data-translate="project-restaurant-desc">UI/UX Design</p>
-                            <button class="view-case-study" onclick="openModal('restaurant-case')" data-translate="view-case-study">View Case Study</button>
+                            <h3>Restaurant App Design</h3>
+                            <p>UI/UX Design</p>
+                            <button class="view-case-study" onclick="openModal('restaurant-case')">View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -1074,9 +1050,9 @@
                     <div class="portfolio-image">
                         <img data-src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop" alt="Tech Startup SMM" class="img-placeholder">
                         <div class="portfolio-overlay">
-                            <h3 data-translate="project-tech-title">Tech Startup Growth</h3>
-                            <p data-translate="project-tech-desc">Social Media Marketing</p>
-                            <button class="view-case-study" onclick="openModal('tech-case')" data-translate="view-case-study">View Case Study</button>
+                            <h3>Tech Startup Growth</h3>
+                            <p>Social Media Marketing</p>
+                            <button class="view-case-study" onclick="openModal('tech-case')">View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -1085,9 +1061,9 @@
                     <div class="portfolio-image">
                         <img data-src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Corporate Website" class="img-placeholder">
                         <div class="portfolio-overlay">
-                            <h3 data-translate="project-corporate-title">Corporate Website</h3>
-                            <p data-translate="project-corporate-desc">Web Development</p>
-                            <button class="view-case-study" onclick="openModal('corporate-case')" data-translate="view-case-study">View Case Study</button>
+                            <h3>Corporate Website</h3>
+                            <p>Web Development</p>
+                            <button class="view-case-study" onclick="openModal('corporate-case')">View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -1096,9 +1072,9 @@
                     <div class="portfolio-image">
                         <img data-src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop" alt="Mobile Banking App" class="img-placeholder">
                         <div class="portfolio-overlay">
-                            <h3 data-translate="project-banking-title">Mobile Banking App</h3>
-                            <p data-translate="project-banking-desc">UI/UX Design</p>
-                            <button class="view-case-study" onclick="openModal('banking-case')" data-translate="view-case-study">View Case Study</button>
+                            <h3>Mobile Banking App</h3>
+                            <p>UI/UX Design</p>
+                            <button class="view-case-study" onclick="openModal('banking-case')">View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -1109,7 +1085,7 @@
     <!-- Modal for Case Studies -->
     <div id="case-study-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeModal()">×</span>
             <div id="modal-body">
                 <!-- Case study content will be inserted here -->
             </div>
@@ -1120,25 +1096,25 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2 data-translate="about-title">About Aviva Agency</h2>
-                    <p data-translate="about-desc1">We are a full-service digital agency specializing in social media marketing and web development. Our team of experts combines creativity with technical expertise to deliver outstanding results.</p>
-                    <p data-translate="about-desc2">With years of experience in the industry, we understand what it takes to build a strong online presence and drive business growth through digital channels.</p>
+                    <h2>About Aviva Agency</h2>
+                    <p>We are a full-service digital agency specializing in social media marketing and web development. Our team of experts combines creativity with technical expertise to deliver outstanding results.</p>
+                    <p>With years of experience in the industry, we understand what it takes to build a strong online presence and drive business growth through digital channels.</p>
                     <div class="stats">
                         <div class="stat">
                             <div class="stat-number">150+</div>
-                            <div data-translate="stat-projects">Projects Completed</div>
+                            <div>Projects Completed</div>
                         </div>
                         <div class="stat">
                             <div class="stat-number">50+</div>
-                            <div data-translate="stat-clients">Happy Clients</div>
+                            <div>Happy Clients</div>
                         </div>
                         <div class="stat">
                             <div class="stat-number">5+</div>
-                            <div data-translate="stat-years">Years Experience</div>
+                            <div>Years Experience</div>
                         </div>
                         <div class="stat">
                             <div class="stat-number">24/7</div>
-                            <div data-translate="stat-support">Support</div>
+                            <div>Support</div>
                         </div>
                     </div>
                 </div>
@@ -1151,31 +1127,31 @@
 
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title" data-translate="contact-title">Get In Touch</h2>
+            <h2 class="section-title">Get In Touch</h2>
             <div class="contact-content">
                 <div class="contact-form">
                     <form>
                         <div class="form-group">
-                            <label for="name" data-translate="form-name">Name</label>
+                            <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email" data-translate="form-email">Email</label>
+                            <label for="email">Email</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="service" data-translate="form-service">Service Needed</label>
+                            <label for="service">Service Needed</label>
                             <input type="text" id="service" name="service">
                         </div>
                         <div class="form-group">
-                            <label for="message" data-translate="form-message">Message</label>
+                            <label for="message">Message</label>
                             <textarea id="message" name="message" required></textarea>
                         </div>
-                        <button type="submit" class="submit-btn" data-translate="form-submit">Send Message</button>
+                        <button type="submit" class="submit-btn">Send Message</button>
                     </form>
                 </div>
                 <div class="contact-info">
-                    <h3 data-translate="contact-info-title">Contact Information</h3>
+                    <h3>Contact Information</h3>
                     <div class="contact-item">
                         <i>📧</i>
                         <span>info@avivaagency.com</span>
@@ -1186,7 +1162,7 @@
                     </div>
                     <div class="contact-item">
                         <i>🕒</i>
-                        <span data-translate="contact-hours">Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
                     </div>
                 </div>
             </div>
@@ -1195,179 +1171,11 @@
 
     <footer>
         <div class="container">
-            <p data-translate="footer-text">&copy; 2024 Aviva Agency. All rights reserved.</p>
+            <p>© 2024 Aviva Agency. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Language translations
-        const translations = {
-            en: {
-                'nav-home': 'Home',
-                'nav-services': 'Services',
-                'nav-about': 'About',
-                'nav-contact': 'Contact',
-                'nav-portfolio': 'Portfolio',
-                'hero-title': 'Digital Marketing & Web Development',
-                'hero-subtitle': 'We create stunning websites and powerful social media strategies that drive results for your business',
-                'hero-cta': 'Get Started Today',
-                'services-title': 'Our Services',
-                'service-smm-title': 'Social Media Marketing',
-                'service-smm-desc': 'Boost your brand presence across all social platforms with our strategic marketing campaigns and engaging content creation.',
-                'service-web-title': 'Web Development',
-                'service-web-desc': 'Custom websites and web applications built with modern technologies to deliver exceptional user experiences.',
-                'service-design-title': 'UI/UX Design',
-                'service-design-desc': 'Beautiful, intuitive designs that convert visitors into customers and provide seamless user experiences.',
-                'service-analytics-title': 'Analytics & SEO',
-                'service-analytics-desc': 'Data-driven insights and search engine optimization to maximize your online visibility and performance.',
-                'portfolio-title': 'Our Portfolio',
-                'portfolio-subtitle': 'Explore our successful projects and case studies',
-                'filter-all': 'All Projects',
-                'filter-smm': 'Social Media',
-                'filter-web': 'Web Development',
-                'filter-design': 'Design',
-                'view-case-study': 'View Case Study',
-                'project-fashion-title': 'Fashion Brand Campaign',
-                'project-fashion-desc': 'Social Media Marketing',
-                'project-ecommerce-title': 'E-commerce Platform',
-                'project-ecommerce-desc': 'Web Development',
-                'project-restaurant-title': 'Restaurant App Design',
-                'project-restaurant-desc': 'UI/UX Design',
-                'project-tech-title': 'Tech Startup Growth',
-                'project-tech-desc': 'Social Media Marketing',
-                'project-corporate-title': 'Corporate Website',
-                'project-corporate-desc': 'Web Development',
-                'project-banking-title': 'Mobile Banking App',
-                'project-banking-desc': 'UI/UX Design',
-                'about-title': 'About Aviva Agency',
-                'about-desc1': 'We are a full-service digital agency specializing in social media marketing and web development. Our team of experts combines creativity with technical expertise to deliver outstanding results.',
-                'about-desc2': 'With years of experience in the industry, we understand what it takes to build a strong online presence and drive business growth through digital channels.',
-                'stat-projects': 'Projects Completed',
-                'stat-clients': 'Happy Clients',
-                'stat-years': 'Years Experience',
-                'stat-support': 'Support',
-                'contact-title': 'Get In Touch',
-                'form-name': 'Name',
-                'form-email': 'Email',
-                'form-service': 'Service Needed',
-                'form-message': 'Message',
-                'form-submit': 'Send Message',
-                'contact-info-title': 'Contact Information',
-                'contact-hours': 'Mon - Fri: 9:00 AM - 6:00 PM',
-                'footer-text': '© 2024 Aviva Agency. All rights reserved.'
-            },
-            uk: {
-                'nav-home': 'Головна',
-                'nav-services': 'Послуги',
-                'nav-about': 'Про нас',
-                'nav-contact': 'Контакти',
-                'nav-portfolio': 'Портфоліо',
-                'hero-title': 'Цифровий маркетинг та веб-розробка',
-                'hero-subtitle': 'Ми створюємо приголомшливі веб-сайти та потужні стратегії соціальних мереж, які приносять результати для вашого бізнесу',
-                'hero-cta': 'Почати сьогодні',
-                'services-title': 'Наші послуги',
-                'service-smm-title': 'Маркетинг у соціальних мережах',
-                'service-smm-desc': 'Підвищуйте присутність вашого бренду на всіх соціальних платформах за допомогою наших стратегічних маркетингових кампаній та залучаючого контенту.',
-                'service-web-title': 'Веб-розробка',
-                'service-web-desc': 'Індивідуальні веб-сайти та веб-додатки, створені з використанням сучасних технологій для надання виняткового користувацького досвіду.',
-                'service-design-title': 'UI/UX дизайн',
-                'service-design-desc': 'Красивий, інтуїтивний дизайн, який перетворює відвідувачів на клієнтів та забезпечує безперебійний користувацький досвід.',
-                'service-analytics-title': 'Аналітика та SEO',
-                'service-analytics-desc': 'Аналітичні дані та оптимізація пошукових систем для максимізації вашої онлайн-видимості та продуктивності.',
-                'portfolio-title': 'Наше портфоліо',
-                'portfolio-subtitle': 'Ознайомтеся з нашими успішними проектами та кейсами',
-                'filter-all': 'Всі проекти',
-                'filter-smm': 'Соціальні мережі',
-                'filter-web': 'Веб-розробка',
-                'filter-design': 'Дизайн',
-                'view-case-study': 'Переглянути кейс',
-                'project-fashion-title': 'Кампанія модного бренду',
-                'project-fashion-desc': 'Маркетинг у соціальних мережах',
-                'project-ecommerce-title': 'E-commerce платформа',
-                'project-ecommerce-desc': 'Веб-розробка',
-                'project-restaurant-title': 'Дизайн додатку ресторану',
-                'project-restaurant-desc': 'UI/UX дизайн',
-                'project-tech-title': 'Зростання тех-стартапу',
-                'project-tech-desc': 'Маркетинг у соціальних мережах',
-                'project-corporate-title': 'Корпоративний веб-сайт',
-                'project-corporate-desc': 'Веб-розробка',
-                'project-banking-title': 'Мобільний банківський додаток',
-                'project-banking-desc': 'UI/UX дизайн',
-                'about-title': 'Про Aviva Agency',
-                'about-desc1': 'Ми - повносервісне цифрове агентство, що спеціалізується на маркетингу в соціальних мережах та веб-розробці. Наша команда експертів поєднує креативність з технічною експертизою для досягнення видатних результатів.',
-                'about-desc2': 'Маючи багаторічний досвід у галузі, ми розуміємо, що потрібно для створення сильної онлайн-присутності та стимулювання зростання бізнесу через цифрові канали.',
-                'stat-projects': 'Завершених проектів',
-                'stat-clients': 'Задоволених клієнтів',
-                'stat-years': 'Років досвіду',
-                'stat-support': 'Підтримка',
-                'contact-title': 'Зв\'яжіться з нами',
-                'form-name': 'Ім\'я',
-                'form-email': 'Електронна пошта',
-                'form-service': 'Потрібна послуга',
-                'form-message': 'Повідомлення',
-                'form-submit': 'Надіслати повідомлення',
-                'contact-info-title': 'Контактна інформація',
-                'contact-hours': 'Пн - Пт: 9:00 - 18:00',
-                'footer-text': '© 2024 Aviva Agency. Всі права захищені.'
-            },
-            de: {
-                'nav-home': 'Startseite',
-                'nav-services': 'Dienstleistungen',
-                'nav-about': 'Über uns',
-                'nav-contact': 'Kontakt',
-                'nav-portfolio': 'Portfolio',
-                'hero-title': 'Digitales Marketing & Webentwicklung',
-                'hero-subtitle': 'Wir erstellen beeindruckende Websites und kraftvolle Social-Media-Strategien, die Ergebnisse für Ihr Unternehmen erzielen',
-                'hero-cta': 'Heute beginnen',
-                'services-title': 'Unsere Dienstleistungen',
-                'service-smm-title': 'Social Media Marketing',
-                'service-smm-desc': 'Steigern Sie Ihre Markenpräsenz auf allen sozialen Plattformen mit unseren strategischen Marketingkampagnen und ansprechenden Inhalten.',
-                'service-web-title': 'Webentwicklung',
-                'service-web-desc': 'Maßgeschneiderte Websites und Webanwendungen mit modernen Technologien für außergewöhnliche Benutzererfahrungen.',
-                'service-design-title': 'UI/UX Design',
-                'service-design-desc': 'Schöne, intuitive Designs, die Besucher in Kunden verwandeln und nahtlose Benutzererfahrungen bieten.',
-                'service-analytics-title': 'Analytics & SEO',
-                'service-analytics-desc': 'Datengesteuerte Einblicke und Suchmaschinenoptimierung zur Maximierung Ihrer Online-Sichtbarkeit und Leistung.',
-                'portfolio-title': 'Unser Portfolio',
-                'portfolio-subtitle': 'Entdecken Sie unsere erfolgreichen Projekte und Fallstudien',
-                'filter-all': 'Alle Projekte',
-                'filter-smm': 'Social Media',
-                'filter-web': 'Webentwicklung',
-                'filter-design': 'Design',
-                'view-case-study': 'Fallstudie ansehen',
-                'project-fashion-title': 'Mode-Marken-Kampagne',
-                'project-fashion-desc': 'Social Media Marketing',
-                'project-ecommerce-title': 'E-Commerce-Plattform',
-                'project-ecommerce-desc': 'Webentwicklung',
-                'project-restaurant-title': 'Restaurant-App-Design',
-                'project-restaurant-desc': 'UI/UX Design',
-                'project-tech-title': 'Tech-Startup-Wachstum',
-                'project-tech-desc': 'Social Media Marketing',
-                'project-corporate-title': 'Unternehmenswebsite',
-                'project-corporate-desc': 'Webentwicklung',
-                'project-banking-title': 'Mobile Banking App',
-                'project-banking-desc': 'UI/UX Design',
-                'about-title': 'Über Aviva Agency',
-                'about-desc1': 'Wir sind eine Full-Service-Digitalagentur, die sich auf Social Media Marketing und Webentwicklung spezialisiert hat. Unser Expertenteam kombiniert Kreativität mit technischer Expertise, um herausragende Ergebnisse zu liefern.',
-                'about-desc2': 'Mit jahrelanger Erfahrung in der Branche verstehen wir, was es braucht, um eine starke Online-Präsenz aufzubauen und das Geschäftswachstum durch digitale Kanäle voranzutreiben.',
-                'stat-projects': 'Abgeschlossene Projekte',
-                'stat-clients': 'Zufriedene Kunden',
-                'stat-years': 'Jahre Erfahrung',
-                'stat-support': 'Support',
-                'contact-title': 'Kontakt aufnehmen',
-                'form-name': 'Name',
-                'form-email': 'E-Mail',
-                'form-service': 'Benötigte Dienstleistung',
-                'form-message': 'Nachricht',
-                'form-submit': 'Nachricht senden',
-                'contact-info-title': 'Kontaktinformationen',
-                'contact-hours': 'Mo - Fr: 9:00 - 18:00 Uhr',
-                'footer-text': '© 2024 Aviva Agency. Alle Rechte vorbehalten.'
-            }
-        };
-
-        let currentLanguage = 'en';
-
         // AMAZING LOADING FUNCTIONALITY
         window.addEventListener('load', function() {
             // Simulate loading time for dramatic effect
@@ -1381,27 +1189,6 @@
                 }, 800);
             }, 3000); // 3 seconds of amazing loading animation
         });
-
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            
-            // Update active button
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Update all translatable elements
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-        }
 
         // Lazy loading functionality
         function lazyLoad() {
@@ -1623,10 +1410,7 @@
             const data = Object.fromEntries(formData);
             
             // Simulate form submission
-            alert(translations[currentLanguage]['form-submit'] + '! ' + 
-                  (currentLanguage === 'en' ? 'Thank you for your message.' : 
-                   currentLanguage === 'uk' ? 'Дякуємо за ваше повідомлення.' : 
-                   'Vielen Dank für Ihre Nachricht.'));
+            alert('Send Message! Thank you for your message.');
             
             // Reset form
             this.reset();
