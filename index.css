@@ -467,6 +467,81 @@ nav {
     line-height: 1.6;
 }
 
+/* NEW STYLES FOR SERVICE DETAIL PAGES */
+.service-detail-page {
+    padding: 80px 0;
+    background: #f8f9fa; /* Can alternate background for different sections */
+}
+
+.service-detail-page:nth-of-type(odd) {
+    background: white;
+}
+
+.service-detail-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.detail-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.detail-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #764ba2; /* Different color for detail icons */
+    transition: transform 0.3s ease;
+}
+
+.detail-card:hover .detail-icon {
+    transform: rotateY(180deg);
+}
+
+.detail-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.detail-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+.service-detail-cta {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.service-detail-cta p {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+
 /* Portfolio Section */
 .portfolio {
     padding: 80px 0;
@@ -940,7 +1015,8 @@ footer {
     }
 
     .about-content,
-    .contact-content {
+    .contact-content,
+    .service-detail-grid { /* Added for responsiveness */
         grid-template-columns: 1fr;
     }
 
