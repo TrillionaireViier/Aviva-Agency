@@ -56,8 +56,6 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="marketing-services.html">Marketing</a></li> <!-- Link to new file -->
-                <li><a href="webdev-services.html">Web Dev</a></li>     <!-- Link to new file -->
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -138,7 +136,7 @@
                 <!-- Case study content will be inserted here -->
             </div>
         </div>
-    </section>
+    </div>
 
     <section id="about" class="about">
         <div class="container">
@@ -362,7 +360,7 @@
             }
         });
 
-        // Smooth scrolling for navigation links (only for internal links now)
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
